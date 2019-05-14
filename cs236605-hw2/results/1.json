@@ -1,0 +1,28 @@
+{
+  "config": {
+    "run_name": "test_run",
+    "out_dir": "./results",
+    "seed": 42,
+    "bs_train": 50,
+    "bs_test": 12,
+    "batches": 10,
+    "epochs": 10,
+    "early_stopping": 5,
+    "checkpoints": null,
+    "lr": 0.001,
+    "reg": 0.001,
+    "filters_per_layer": [
+      32
+    ],
+    "layers_per_block": 1,
+    "pool_every": 1,
+    "hidden_dims": [
+      100
+    ],
+    "ycn": false,
+    "kw": {}
+  },
+  "results": {
+    "num_epochs": 10,
+    "train_loss": [
+      
