@@ -62,6 +62,8 @@ def run_experiment(run_name, out_dir='./results', seed=None,
         for _ in range(layers_per_block):
             filters_per_block.append(filters)
     
+    print(filters_per_block)
+    
     model = model_cls((3, 32, 32), 10, filters=filters_per_block, pool_every=pool_every, hidden_dims=hidden_dims)
     loss_fn = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=0.9, weight_decay=reg)
