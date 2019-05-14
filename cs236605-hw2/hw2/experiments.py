@@ -66,8 +66,8 @@ def run_experiment(run_name, out_dir='./results', seed=None,
     loss_fn = torch.nn.CrossEntropyLoss().to(device)
     optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=0.9, weight_decay=reg)
     
-    dl_train = torch.utils.data.DataLoader(ds_train, bs_train, shuffle=True)
-    dl_test = torch.utils.data.DataLoader(ds_test, bs_test, shuffle=True)
+    dl_train = torch.utils.data.DataLoader(ds_train.to(device), bs_train, shuffle=True)
+    dl_test = torch.utils.data.DataLoader(ds_test.to(device), bs_test, shuffle=True)
     
     trainer = training.TorchTrainer(model, loss_fn, optimizer)
     
