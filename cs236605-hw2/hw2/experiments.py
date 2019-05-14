@@ -63,11 +63,11 @@ def run_experiment(run_name, out_dir='./results', seed=None,
             filters_per_block.append(filters)
     
     model = model_cls((3, 32, 32), 10, filters=filters_per_block, pool_every=pool_every, hidden_dims=hidden_dims).to(device)
-    loss_fn = torch.nn.CrossEntropyLoss()
-    optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=0.9, weight_decay=reg)
+    loss_fn = torch.nn.CrossEntropyLoss().to(device)
+    optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=0.9, weight_decay=reg).to(device)
     
-    dl_train = torch.utils.data.DataLoader(ds_train, bs_train, shuffle=True)
-    dl_test = torch.utils.data.DataLoader(ds_test, bs_test, shuffle=True)
+    dl_train = torch.utils.data.DataLoader(ds_train, bs_train, shuffle=True).to(device)
+    dl_test = torch.utils.data.DataLoader(ds_test, bs_test, shuffle=True).to(device)
     
     trainer = training.TorchTrainer(model, loss_fn, optimizer)
     
