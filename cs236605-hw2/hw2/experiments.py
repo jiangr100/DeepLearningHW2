@@ -62,14 +62,14 @@ def run_experiment(run_name, out_dir='./results', seed=None,
         for _ in range(layers_per_block):
             filters_per_block.append(filters)
     
-    model = model_cls((3, 32, 32), 10, filters=filters_per_block, pool_every=pool_every, hidden_dims=hidden_dims).to(device)
+    model = model_cls((3, 32, 32), 10, filters=filters_per_block, pool_every=pool_every, hidden_dims=hidden_dims)
     loss_fn = torch.nn.CrossEntropyLoss().to(device)
     optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=0.9, weight_decay=reg)
     
-    dl_train = torch.utils.data.DataLoader(ds_train.to(device), bs_train, shuffle=True)
-    dl_test = torch.utils.data.DataLoader(ds_test.to(device), bs_test, shuffle=True)
+    dl_train = torch.utils.data.DataLoader(ds_train, bs_train, shuffle=True)
+    dl_test = torch.utils.data.DataLoader(ds_test, bs_test, shuffle=True)
     
-    trainer = training.TorchTrainer(model, loss_fn, optimizer)
+    trainer = training.TorchTrainer(model, loss_fn, optimizer, device)
     
     actual_num_epochs = 0
     train_loss, train_acc, test_loss, test_acc = [], [], [], []
