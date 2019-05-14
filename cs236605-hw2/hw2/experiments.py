@@ -42,7 +42,7 @@ def run_experiment(run_name, out_dir='./results', seed=None,
     ds_train = CIFAR10(root=DATA_DIR, download=True, train=True, transform=tf)
     ds_test = CIFAR10(root=DATA_DIR, download=True, train=False, transform=tf)
 
-    device = torch.device('cuda10' if torch.cuda.is_available() else 'cpu')
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     # Select model class (experiment 1 or 2)
     model_cls = models.ConvClassifier if not ycn else models.YourCodeNet
