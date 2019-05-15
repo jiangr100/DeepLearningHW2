@@ -194,15 +194,17 @@ class YourCodeNet(ConvClassifier):
         P = self.pool_every
         
         prev = in_channels
+        it = 0
         
         for i in range(int(N/P)):
             for j in range(P):
-                conv = nn.Conv2d(prev, self.filters[j], kernel_size=3, padding=1)
+                conv = nn.Conv2d(prev, self.filters[it], kernel_size=3, padding=1)
                 relu = nn.ReLU()
                 dropout = nn.Dropout2d(0.5)
                 layers.extend([conv, relu, dropout])
                 
-                prev = self.filters[j]
+                prev = self.filters[it]
+                it += 1
             
             batchnorm = nn.BatchNorm2d(prev)
             maxpool = nn.MaxPool2d(2, stride=2)
